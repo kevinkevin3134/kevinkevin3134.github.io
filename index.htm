@@ -3,44 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gustav Adolfs Torg - Malmö</title>
+    <title>Gustav Adolfs Torg i Malmö</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script>
 </head>
 <body>
     <header>
-        <h1>Gustav Adolfs Torg</h1>
+        <h1>Välkommen till Gustav Adolfs Torg</h1>
         <nav>
             <ul>
-                <li><a href="#info">Om torget</a></li>
+                <li><a href="#om">Om Torg</a></li>
                 <li><a href="#historik">Historik</a></li>
+                <li><a href="#aktiviteter">Aktiviteter</a></li>
                 <li><a href="#bilder">Bilder</a></li>
+                <li><a href="#karta">Karta</a></li>
             </ul>
         </nav>
     </header>
 
-    <section id="info">
-        <h2>Om Gustav Adolfs Torg</h2>
-        <p>Gustav Adolfs Torg är en central plats i Malmö och ett av stadens mest välkända torg. Torget har en lång historia och är en viktig knutpunkt för stadens kultur- och samhällsliv.</p>
+    <section id="om">
+        <h2>Om Torg</h2>
+        <p>Gustav Adolfs torg är en central plats i Malmö, omgiven av viktiga byggnader som stadsbiblioteket och Malmö rådhus. Platsen är känd för sina vackra fontäner och trädgårdar, vilket gör den till en populär plats för både lokalbefolkning och turister.</p>
     </section>
 
     <section id="historik">
         <h2>Historik</h2>
-        <p>Gustav Adolfs Torg har sitt namn efter Gustav II Adolf, och torget har genom åren varit en plats för både handel och offentliga evenemang. Här finns även flera viktiga byggnader som bidrar till torgets unika karaktär.</p>
+        <p>Torget invigdes år 1624 och har sedan dess genomgått många förändringar. Det har varit en plats för marknader, politiska sammankomster, och kulturella evenemang.</p>
+    </section>
+
+    <section id="aktiviteter">
+        <h2>Aktiviteter</h2>
+        <p>Det finns ofta olika evenemang och aktiviteter som äger rum på Gustav Adolfs torg, inklusive konserter, konstutställningar och matmarknader.</p>
     </section>
 
     <section id="bilder">
         <h2>Bilder</h2>
-        <div class="image-gallery">
-            <img src="https://via.placeholder.com/300" alt="Bild 1">
-            <img src="https://via.placeholder.com/300" alt="Bild 2">
-            <img src="https://via.placeholder.com/300" alt="Bild 3">
+        <div class="gallery">
+            <img src="bild1.jpg" alt="Gustav Adolfs Torg 1">
+            <img src="bild2.jpg" alt="Gustav Adolfs Torg 2">
+            <img src="bild3.jpg" alt="Gustav Adolfs Torg 3">
         </div>
     </section>
 
+    <section id="karta">
+        <h2>Besök oss på Google Maps</h2>
+        <div id="map"></div>
+    </section>
+
     <footer>
-        <p>&copy; 2025 Gustav Adolfs Torg Malmö</p>
+        <p>&copy; 2023 Gustav Adolfs Torg. Alla rättigheter förbehållna.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        function initMap() {
+            const torgLocation = { lat: 55.6050, lng: 13.0007 }; // Koordinater för Gustav Adolfs Torg
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 15,
+                center: torgLocation,
+            });
+            const marker = new google.maps.Marker({
+                position: torgLocation,
+                map: map,
+                title: "Gustav Adolfs Torg, Malmö",
+            });
+        }
+
+        window.onload = initMap;
+    </script>
 </body>
 </html>

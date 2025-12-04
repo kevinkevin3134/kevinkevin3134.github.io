@@ -3,62 +3,314 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gustav Adolfs Torg i Malmö</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Real Madrid CF</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script>
+    <style>
+        * {margin:0; padding:0; box-sizing:border-box; font-family:'Roboto', sans-serif;}
+        body {background:#f5f5f5; color:#333; scroll-behavior: smooth;}
+
+        header {
+            background: #000 url('real_madrid_logo.png') no-repeat center 50px;
+            background-size: 150px;
+            color:#fff;
+            text-align:center;
+            padding:150px 20px 50px 20px;
+        }
+
+        header h1 {
+            font-size:3em;
+            letter-spacing:3px;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+        }
+
+        nav {
+            background:#fff;
+            display:flex;
+            justify-content:center;
+            gap:25px;
+            padding:15px 0;
+            position: sticky;
+            top:0;
+            z-index:1000;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        nav a {text-decoration:none; color:#000; font-weight:700; transition:0.3s;}
+        nav a:hover {color:#0077cc;}
+
+        section {padding:80px 20px; max-width:1200px; margin:auto;}
+
+        section h2 {
+            text-align:center;
+            font-size:2.5em;
+            margin-bottom:50px;
+            color:#0077cc;
+            position: relative;
+        }
+
+        section h2::after {
+            content:"";
+            display:block;
+            width:60px;
+            height:4px;
+            background:#0077cc;
+            margin:10px auto 0 auto;
+            border-radius:2px;
+        }
+
+        /* FAKTA */
+        .facts {
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+            gap:30px;
+        }
+
+        .fact-card {
+            background:#fff;
+            border-radius:20px;
+            padding:25px;
+            text-align:center;
+            box-shadow:0 10px 20px rgba(0,0,0,0.1);
+            transition:0.3s;
+        }
+
+        .fact-card:hover {
+            transform: translateY(-10px);
+            box-shadow:0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .fact-card img {
+            width:60px;
+            margin-bottom:15px;
+        }
+
+        /* KORTLAYOUT */
+        .cards {
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:30px;
+        }
+
+        .card {
+            background:#fff;
+            border-radius:20px;
+            padding:25px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            text-align:center;
+        }
+
+        /* === HOVER ANIMATIONER PÅ KORT === */
+        .card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+        }
+
+        /* === SPELARBILDER RUNDA MED ANIMATION === */
+        .player-img {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center top;
+            margin: auto;
+            display: block;
+            margin-bottom: 15px;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .card:hover .player-img {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 119, 204, 0.4);
+        }
+
+        /* === TEXTANIMATIONER === */
+        .card h3, .card p {
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .card:hover h3 {
+            color:#0077cc;
+            transform: translateY(-3px);
+        }
+
+        .card:hover p {
+            color:#444;
+            transform: translateY(-2px);
+        }
+
+        .shop img {
+            max-width:200px;
+            margin-bottom:15px;
+        }
+
+        /* REKORD */
+        .stats {
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:30px;
+            margin-top:40px;
+        }
+
+        .stat {
+            background:#fff;
+            border-radius:20px;
+            padding:20px;
+            width:200px;
+            text-align:center;
+            box-shadow:0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .stat h3 {
+            font-size:1.5em;
+            color:#0077cc;
+            margin-bottom:10px;
+        }
+
+        .stat p {
+            font-size:2em;
+            font-weight:700;
+        }
+
+        footer {
+            background:#000;
+            color:#fff;
+            text-align:center;
+            padding:40px 20px;
+            margin-top:50px;
+        }
+    </style>
 </head>
+
 <body>
+
     <header>
-        <h1>Välkommen till Gustav Adolfs Torg</h1>
-        <nav>
-            <ul>
-                <li><a href="#om">Om Torg</a></li>
-                <li><a href="#historik">Historik</a></li>
-                <li><a href="#aktiviteter">Aktiviteter</a></li>
-                <li><a href="#bilder">Bilder</a></li>
-                <li><a href="#karta">Karta</a></li>
-            </ul>
-        </nav>
+        <h1>Real Madrid CF</h1>
     </header>
 
-    <section id="om">
-        <h2>Om Torg</h2>
-        <p>Gustav Adolfs torg är en central plats i Malmö, omgiven av viktiga byggnader som stadsbiblioteket och Malmö rådhus. Platsen är känd för sina vackra fontäner och trädgårdar, vilket gör den till en populär plats för både lokalbefolkning och turister.</p>
-    </section>
+    <nav>
+        <a href="#facts">Fakta</a>
+        <a href="#players">Ikoniska Spelare</a>
+        <a href="#records">Rekord</a>
+        <a href="#shop">Bernabéu Shop</a>
+    </nav>
 
-    <section id="historik">
-        <h2>Historik</h2>
-        <p>Torget invigdes år 1624 och har sedan dess genomgått många förändringar. Det har varit en plats för marknader, politiska sammankomster, och kulturella evenemang.</p>
-    </section>
-
-    <section id="aktiviteter">
-        <h2>Aktiviteter</h2>
-        <p>Det finns ofta olika evenemang och aktiviteter som äger rum på Gustav Adolfs torg, inklusive konserter, konstutställningar och matmarknader.</p>
-    </section>
-
-    <section id="bilder">
-        <h2>Bilder</h2>
-        <div class="gallery">
-            <img src="image/bild1.jpg" alt="Gustav Adolfs Torg 1">
-            <img src="image/bild2.jpg" alt="Gustav Adolfs Torg 2">
-            <img src="image/bild3.jpg" alt="Gustav Adolfs Torg 3">
+    <!-- FAKTA -->
+    <section id="facts">
+        <h2>Fakta om Real Madrid</h2>
+        <div class="facts">
+            <div class="fact-card">
+                <img src="https://img.icons8.com/ios-filled/50/0077cc/calendar.png">
+                <h3>Grundat</h3>
+                <p>1902</p>
+            </div>
+            <div class="fact-card">
+                <img src="https://img.icons8.com/ios-filled/50/0077cc/stadium.png">
+                <h3>Hemmaarena</h3>
+                <p>Santiago Bernabéu</p>
+            </div>
+            <div class="fact-card">
+                <img src="https://img.icons8.com/ios-filled/50/0077cc/domain.png">
+                <h3>Hemsida</h3>
+                <p><a href="https://www.realmadrid.com" target="_blank">realmadrid.com</a></p>
+            </div>
+            <div class="fact-card">
+                <img src="https://img.icons8.com/ios-filled/50/0077cc/paint-palette.png">
+                <h3>Färg</h3>
+                <p>Vit</p>
+            </div>
         </div>
     </section>
 
-    <section id="karta">
-        <h2>Besök oss på Google Maps</h2>
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d23777.04264685664!2d13.002165418549438!3d55.60501596664376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4653b6ee0a4d84b5%3A0x70ad5af36e8b5514!2sGustav%20Adolfs%20Torg%2C%20Malm%C3%B6%2C%20Sverige!5e0!3m2!1ssv!2sus!4v1680629120812!5m2!1ssv!2sus"
-            width="600"
-            height="400"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"></iframe>
+    <!-- SPELARE -->
+    <section id="players">
+        <h2>Ikoniska Spelare</h2>
+        <div class="cards">
+
+            <div class="card">
+                <img src="ronaldo.png" class="player-img">
+                <h3>Cristiano Ronaldo</h3>
+                <p>En av världens bästa målskyttar genom tiderna.</p>
+            </div>
+
+            <div class="card">
+                <img src="zidane.png" class="player-img">
+                <h3>Zinedine Zidane</h3>
+                <p>Fransk mittfältare känd för sin elegans och teknik.</p>
+            </div>
+
+            <div class="card">
+                <img src="ramos.png" class="player-img">
+                <h3>Sergio Ramos</h3>
+                <p>Långvarig lagkapten och defensiv legend.</p>
+            </div>
+
+        </div>
     </section>
 
-    <footer>
-        <p>© 2023 Gustav Adolfs Torg. Alla rättigheter förbehållna.</p>
-    </footer>
+    <!-- REKORD -->
+    <section id="records">
+        <h2>Rekord</h2>
+        <div class="stats">
+            <div class="stat"><h3>Champions League</h3><p class="count" data-target="14">0</p></div>
+            <div class="stat"><h3>La Liga</h3><p class="count" data-target="35">0</p></div>
+            <div class="stat"><h3>Mål av Ronaldo</h3><p class="count" data-target="450">0</p></div>
+            <div class="stat"><h3>Utan förlust</h3><p class="count" data-target="28">0</p></div>
+        </div>
+    </section>
+
+    <!-- SHOP -->
+    <section id="shop">
+        <h2>Bernabéu Shop</h2>
+        <div class="cards shop">
+            <div class="card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Real_Madrid_Shirt.jpg">
+                <h3>Tröjor</h3>
+                <p>Officiella matchtröjor och supportertröjor.</p>
+            </div>
+            <div class="card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Real_Madrid_Scarf.jpg">
+                <h3>Halsdukar</h3>
+                <p>Perfekt för matchdagen.</p>
+            </div>
+            <div class="card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Real_Madrid_Cap.jpg">
+                <h3>Kepsar</h3>
+                <p>Klassiska kepsar för fans.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>© 2025 Real Madrid CF</footer>
+
+    <script>
+        /* RÄKNARE ANIMATION */
+        const counters = document.querySelectorAll('.count');
+        counters.forEach(counter => {
+            counter.innerText = '0';
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const increment = Math.ceil(target / 100);
+                if(count < target){
+                    counter.innerText = count + increment;
+                    setTimeout(updateCount, 20);
+                } else {
+                    counter.innerText = target;
+                }
+            }
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting){
+                        updateCount();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {threshold:0.5});
+            observer.observe(counter);
+        });
+    </script>
+
 </body>
 </html>

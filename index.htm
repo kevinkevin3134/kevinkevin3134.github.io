@@ -3,314 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Madrid CF</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        * {margin:0; padding:0; box-sizing:border-box; font-family:'Roboto', sans-serif;}
-        body {background:#f5f5f5; color:#333; scroll-behavior: smooth;}
+    <title>Real Madrid C.F. | Officiell Fan-sida</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-        header {
-            background: #000 url('real_madrid_logo.png') no-repeat center 50px;
-            background-size: 150px;
-            color:#fff;
-            text-align:center;
-            padding:150px 20px 50px 20px;
-        }
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-        header h1 {
-            font-size:3em;
-            letter-spacing:3px;
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-        }
-
-        nav {
-            background:#fff;
-            display:flex;
-            justify-content:center;
-            gap:25px;
-            padding:15px 0;
-            position: sticky;
-            top:0;
-            z-index:1000;
-            box-shadow:0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        nav a {text-decoration:none; color:#000; font-weight:700; transition:0.3s;}
-        nav a:hover {color:#0077cc;}
-
-        section {padding:80px 20px; max-width:1200px; margin:auto;}
-
-        section h2 {
-            text-align:center;
-            font-size:2.5em;
-            margin-bottom:50px;
-            color:#0077cc;
-            position: relative;
-        }
-
-        section h2::after {
-            content:"";
-            display:block;
-            width:60px;
-            height:4px;
-            background:#0077cc;
-            margin:10px auto 0 auto;
-            border-radius:2px;
-        }
-
-        /* FAKTA */
-        .facts {
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-            gap:30px;
-        }
-
-        .fact-card {
-            background:#fff;
-            border-radius:20px;
-            padding:25px;
-            text-align:center;
-            box-shadow:0 10px 20px rgba(0,0,0,0.1);
-            transition:0.3s;
-        }
-
-        .fact-card:hover {
-            transform: translateY(-10px);
-            box-shadow:0 15px 30px rgba(0,0,0,0.2);
-        }
-
-        .fact-card img {
-            width:60px;
-            margin-bottom:15px;
-        }
-
-        /* KORTLAYOUT */
-        .cards {
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-            gap:30px;
-        }
-
-        .card {
-            background:#fff;
-            border-radius:20px;
-            padding:25px;
-            box-shadow:0 10px 25px rgba(0,0,0,0.1);
-            transition: transform 0.35s ease, box-shadow 0.35s ease;
-            text-align:center;
-        }
-
-        /* === HOVER ANIMATIONER PÅ KORT === */
-        .card:hover {
-            transform: translateY(-12px) scale(1.03);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-        }
-
-        /* === SPELARBILDER RUNDA MED ANIMATION === */
-        .player-img {
-            width: 170px;
-            height: 170px;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: center top;
-            margin: auto;
-            display: block;
-            margin-bottom: 15px;
-            transition: transform 0.35s ease, box-shadow 0.35s ease;
-        }
-
-        .card:hover .player-img {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(0, 119, 204, 0.4);
-        }
-
-        /* === TEXTANIMATIONER === */
-        .card h3, .card p {
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        .card:hover h3 {
-            color:#0077cc;
-            transform: translateY(-3px);
-        }
-
-        .card:hover p {
-            color:#444;
-            transform: translateY(-2px);
-        }
-
-        .shop img {
-            max-width:200px;
-            margin-bottom:15px;
-        }
-
-        /* REKORD */
-        .stats {
-            display:flex;
-            flex-wrap:wrap;
-            justify-content:center;
-            gap:30px;
-            margin-top:40px;
-        }
-
-        .stat {
-            background:#fff;
-            border-radius:20px;
-            padding:20px;
-            width:200px;
-            text-align:center;
-            box-shadow:0 8px 20px rgba(0,0,0,0.1);
-        }
-
-        .stat h3 {
-            font-size:1.5em;
-            color:#0077cc;
-            margin-bottom:10px;
-        }
-
-        .stat p {
-            font-size:2em;
-            font-weight:700;
-        }
-
-        footer {
-            background:#000;
-            color:#fff;
-            text-align:center;
-            padding:40px 20px;
-            margin-top:50px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <header>
-        <h1>Real Madrid CF</h1>
-    </header>
-
-    <nav>
-        <a href="#facts">Fakta</a>
-        <a href="#players">Ikoniska Spelare</a>
-        <a href="#records">Rekord</a>
-        <a href="#shop">Bernabéu Shop</a>
+    <nav class="navbar">
+        <div class="logo">REAL MADRID C.F.</div>
+        <ul class="nav-links">
+            <li><a href="#home">Hem</a></li>
+            <li><a href="#history">Historia</a></li>
+            <li><a href="#players">Spelare</a></li>
+            <li><a href="#stadium">Arena</a></li>
+            <li><a href="#map">Karta</a></li>
+        </ul>
     </nav>
 
-    <!-- FAKTA -->
-    <section id="facts">
-        <h2>Fakta om Real Madrid</h2>
-        <div class="facts">
-            <div class="fact-card">
-                <img src="https://img.icons8.com/ios-filled/50/0077cc/calendar.png">
-                <h3>Grundat</h3>
-                <p>1902</p>
-            </div>
-            <div class="fact-card">
-                <img src="https://img.icons8.com/ios-filled/50/0077cc/stadium.png">
-                <h3>Hemmaarena</h3>
-                <p>Santiago Bernabéu</p>
-            </div>
-            <div class="fact-card">
-                <img src="https://img.icons8.com/ios-filled/50/0077cc/domain.png">
-                <h3>Hemsida</h3>
-                <p><a href="https://www.realmadrid.com" target="_blank">realmadrid.com</a></p>
-            </div>
-            <div class="fact-card">
-                <img src="https://img.icons8.com/ios-filled/50/0077cc/paint-palette.png">
-                <h3>Färg</h3>
-                <p>Vit</p>
+    <header id="home" class="hero">
+        <div class="hero-content">
+            <h1>HALA MADRID</h1>
+            <p>Kungarna av Europa. Världens största klubb.</p>
+            <a href="#history" class="btn-gold">Utforska Legenden</a>
+        </div>
+    </header>
+
+    <section id="history" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Vår Historia & Rekord</h2>
+            <div class="history-grid">
+                <div class="card">
+                    <i class="fas fa-trophy icon-gold"></i>
+                    <h3>Champions League</h3>
+                    <p>Mest framgångsrika klubben i historien med 15 titlar.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-crown icon-gold"></i>
+                    <h3>La Liga</h3>
+                    <p>Dominans i Spanien med över 35 ligatitlar.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-star icon-gold"></i>
+                    <h3>Grundades 1902</h3>
+                    <p>Från Madrid Foot-Ball Club till världens bästa lag.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- SPELARE -->
-    <section id="players">
-        <h2>Ikoniska Spelare</h2>
-        <div class="cards">
-
-            <div class="card">
-                <img src="ronaldo.png" class="player-img">
-                <h3>Cristiano Ronaldo</h3>
-                <p>En av världens bästa målskyttar genom tiderna.</p>
-            </div>
-
-            <div class="card">
-                <img src="zidane.png" class="player-img">
-                <h3>Zinedine Zidane</h3>
-                <p>Fransk mittfältare känd för sin elegans och teknik.</p>
-            </div>
-
-            <div class="card">
-                <img src="ramos.png" class="player-img">
-                <h3>Sergio Ramos</h3>
-                <p>Långvarig lagkapten och defensiv legend.</p>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- REKORD -->
-    <section id="records">
-        <h2>Rekord</h2>
-        <div class="stats">
-            <div class="stat"><h3>Champions League</h3><p class="count" data-target="14">0</p></div>
-            <div class="stat"><h3>La Liga</h3><p class="count" data-target="35">0</p></div>
-            <div class="stat"><h3>Mål av Ronaldo</h3><p class="count" data-target="450">0</p></div>
-            <div class="stat"><h3>Utan förlust</h3><p class="count" data-target="28">0</p></div>
-        </div>
-    </section>
-
-    <!-- SHOP -->
-    <section id="shop">
-        <h2>Bernabéu Shop</h2>
-        <div class="cards shop">
-            <div class="card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Real_Madrid_Shirt.jpg">
-                <h3>Tröjor</h3>
-                <p>Officiella matchtröjor och supportertröjor.</p>
-            </div>
-            <div class="card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Real_Madrid_Scarf.jpg">
-                <h3>Halsdukar</h3>
-                <p>Perfekt för matchdagen.</p>
-            </div>
-            <div class="card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Real_Madrid_Cap.jpg">
-                <h3>Kepsar</h3>
-                <p>Klassiska kepsar för fans.</p>
+    <section id="players" class="section-dark">
+        <div class="container">
+            <h2 class="section-title text-white">Stjärnspelare</h2>
+            <div class="players-grid">
+                <div class="player-card">
+                    <div class="player-img" style="background-image: url('https://publish-p47754-e237306.adobeaemcloud.com/adobe/assets/urn:aaid:aem:38a06584-81d3-469b-9c2b-e74c84439c27/as/Vinicius_Jr_Website_Blanco_24-25.png?width=512&height=512')"></div>
+                    <h3>Vinícius Jr.</h3>
+                    <p>Anfallare</p>
+                </div>
+                <div class="player-card">
+                    <div class="player-img" style="background-image: url('https://publish-p47754-e237306.adobeaemcloud.com/adobe/assets/urn:aaid:aem:34c9c642-1e9a-4e58-944a-0a424754751f/as/Bellingham_Website_Blanco_24-25.png?width=512&height=512')"></div>
+                    <h3>Jude Bellingham</h3>
+                    <p>Mittfältare</p>
+                </div>
+                <div class="player-card">
+                    <div class="player-img" style="background-image: url('https://publish-p47754-e237306.adobeaemcloud.com/adobe/assets/urn:aaid:aem:5d739268-c913-4390-8488-842245e345e8/as/Mbappe_Website_Blanco_24-25.png?width=512&height=512')"></div>
+                    <h3>Kylian Mbappé</h3>
+                    <p>Anfallare</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer>© 2025 Real Madrid CF</footer>
+    <section id="stadium" class="section-padding">
+        <div class="container stadium-layout">
+            <div class="stadium-text">
+                <h2>Estadio Santiago Bernabéu</h2>
+                <p>En av världens mest ikoniska fotbollsarenor. Efter den senaste renoveringen är det ett arkitektoniskt mästerverk med stängbart tak och infällbar gräsmatta.</p>
+                <ul class="stadium-facts">
+                    <li><strong>Kapacitet:</strong> ca 85,000</li>
+                    <li><strong>Invigd:</strong> 1947</li>
+                    <li><strong>Plats:</strong> Chamartín, Madrid</li>
+                </ul>
+            </div>
+            <div class="stadium-image">
+                <img src="https://images.unsplash.com/photo-1577223625816-7546f13df25d?q=80&w=1000&auto=format&fit=crop" alt="Santiago Bernabéu">
+            </div>
+        </div>
+    </section>
 
-    <script>
-        /* RÄKNARE ANIMATION */
-        const counters = document.querySelectorAll('.count');
-        counters.forEach(counter => {
-            counter.innerText = '0';
-            const updateCount = () => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                const increment = Math.ceil(target / 100);
-                if(count < target){
-                    counter.innerText = count + increment;
-                    setTimeout(updateCount, 20);
-                } else {
-                    counter.innerText = target;
-                }
-            }
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if(entry.isIntersecting){
-                        updateCount();
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {threshold:0.5});
-            observer.observe(counter);
-        });
-    </script>
+    <section id="map" class="section-dark">
+        <div class="container">
+            <h2 class="section-title text-white">Hitta oss i Madrid</h2>
+            <p class="text-center text-white">Santiago Bernabéu & Plaza de Cibeles</p>
+            <div id="map-container"></div>
+        </div>
+    </section>
 
+    <footer>
+        <p>&copy; 2024 Real Madrid Fan Page. Hala Madrid y nada más.</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

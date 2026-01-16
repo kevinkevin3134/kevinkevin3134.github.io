@@ -176,7 +176,51 @@
         .hero h1 {
             font-size: 5rem;
             line-height: 1.1;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Countdown Style */
+        .countdown-box {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(207, 161, 67, 0.2);
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin-bottom: 2.5rem;
+            max-width: 420px;
+        }
+
+        .match-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-gray);
+            margin-bottom: 10px;
+        }
+
+        .timer-display {
+            display: flex;
+            gap: 20px;
+        }
+
+        .time-part {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .time-part span {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--rm-gold);
+            line-height: 1;
+        }
+
+        .time-part label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            color: var(--text-gray);
+            margin-top: 5px;
         }
 
         .btn {
@@ -270,10 +314,9 @@
             display: flex;
             justify-content: center;
             position: relative;
-            perspective: 1000px; /* Skapar 3D-rummet */
+            perspective: 1000px;
         }
 
-        /* Ljuseffekt bakom tröjan */
         .kit-image-container::before {
             content: '';
             position: absolute;
@@ -292,11 +335,9 @@
             width: 80%;
             max-width: 400px;
             z-index: 1;
-            /* Snabbare transition för responsiv 3D-känsla */
             transition: transform 0.1s ease-out;
             will-change: transform;
             border-radius: 20px;
-            /* Lätt skugga som förstärker djupet */
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
@@ -357,12 +398,11 @@
         /* --- ARENA --- */
         .stadium-section {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* Text vänster, Karta höger */
+            grid-template-columns: 1fr 1fr;
             gap: 5rem;
             align-items: start;
         }
         
-        /* Ny klass för bilden i arenasektionen */
         .stadium-photo {
             width: 100%;
             border-radius: 8px;
@@ -376,7 +416,7 @@
         .stadium-photo:hover { opacity: 1; transform: scale(1.02); }
         
         .map-frame {
-            height: 600px; /* Lite högre karta för att matcha text+bild */
+            height: 600px;
             width: 100%;
             border: 1px solid var(--rm-gold);
             position: relative;
@@ -400,6 +440,8 @@
         @media (max-width: 1024px) {
             .hero { flex-direction: column-reverse; justify-content: center; text-align: center; padding-top: 150px; }
             .hero-logo { width: 200px; margin-bottom: 2rem; }
+            .countdown-box { margin: 0 auto 2.5rem auto; }
+            .timer-display { justify-content: center; }
             .history-grid, .stadium-section, .kit-section { grid-template-columns: 1fr; display: flex; flex-direction: column; }
             .nav-links { display: none; }
             .map-frame { height: 400px; }
@@ -428,9 +470,32 @@
         <div class="hero-content reveal">
             <span class="hero-subtitle">The Kings of Europe</span>
             <h1>More Than <br> A <span class="serif-italic">Club.</span></h1>
-            <p style="color: #ccc; margin-bottom: 2.5rem; max-width: 500px;">
+            <p style="color: #ccc; margin-bottom: 1.5rem; max-width: 500px;">
                 Välkommen till världens mest framgångsrika fotbollsklubb. En historia skriven i guld. En framtid säkrad av stjärnor.
             </p>
+
+            <div class="countdown-box reveal delay-100">
+                <p class="match-title">Nästa Match: <span class="serif-italic">El Clásico</span></p>
+                <div class="timer-display">
+                    <div class="time-part">
+                        <span id="days">00</span>
+                        <label>Dagar</label>
+                    </div>
+                    <div class="time-part">
+                        <span id="hours">00</span>
+                        <label>Tim</label>
+                    </div>
+                    <div class="time-part">
+                        <span id="minutes">00</span>
+                        <label>Min</label>
+                    </div>
+                    <div class="time-part">
+                        <span id="seconds">00</span>
+                        <label>Sek</label>
+                    </div>
+                </div>
+            </div>
+
             <a href="#players" class="btn btn-primary">Se Truppen</a>
         </div>
 
@@ -573,12 +638,36 @@
 
     <footer>
         <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/1200px-Real_Madrid_CF.svg.png" width="50" style="opacity: 0.5; margin-bottom: 20px;">
-        <p>&copy; 2024 Real Madrid Fan Page. Hala Madrid y nada más.</p>
+        <p>&copy; 2026 Real Madrid Fan Page. Hala Madrid y nada más.</p>
     </footer>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // KARTA
+        // --- 1. COUNTDOWN LOGIK ---
+        function updateTimer() {
+            // Sätt datumet till nästa match (Justera vid behov)
+            const matchDate = new Date("Feb 14, 2026 21:00:00").getTime();
+            const now = new Date().getTime();
+            const diff = matchDate - now;
+
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById("days").innerText = days.toString().padStart(2, '0');
+                document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+                document.getElementById("minutes").innerText = mins.toString().padStart(2, '0');
+                document.getElementById("seconds").innerText = secs.toString().padStart(2, '0');
+            } else {
+                document.querySelector(".countdown-box").innerHTML = "<h3 style='color:var(--rm-gold)'>MATCHEN PÅGÅR!</h3>";
+            }
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // --- 2. KARTA ---
         const map = L.map('map-container', { zoomControl: false }).setView([40.4530541, -3.6883445], 15);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
             attribution: 'OpenStreetMap',
@@ -596,7 +685,7 @@
         L.marker([40.4530541, -3.6883445], {icon: goldIcon}).addTo(map)
             .bindPopup("<b>Bernabéu</b>").openPopup();
 
-        // SCROLL ANIMATION
+        // --- 3. SCROLL ANIMATION ---
         const revealElements = document.querySelectorAll('.reveal');
         const revealOnScroll = () => {
             const windowHeight = window.innerHeight;
@@ -611,31 +700,21 @@
         window.addEventListener('scroll', revealOnScroll);
         revealOnScroll();
 
-        // --- NY 3D KIT ANIMATION (Med musrörelse) ---
+        // --- 4. 3D KIT ANIMATION ---
         const kitContainer = document.querySelector('.kit-image-container');
         const kitImg = document.querySelector('.kit-img');
 
         kitContainer.addEventListener('mousemove', (e) => {
-            // Hitta mitten av behållaren
             const rect = kitContainer.getBoundingClientRect();
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
-
-            // Räkna ut musens position i förhållande till mitten
             const mouseX = e.clientX - centerX;
             const mouseY = e.clientY - centerY;
-
-            // Räkna ut rotation (justera siffrorna för känslighet)
-            // rotateY styr rotationen höger/vänster
             const rotateY = mouseX * 0.1; 
-            // rotateX styr lutningen upp/ner (lite mindre känslig)
             const rotateX = mouseY * -0.05;
-
-            // Applicera transformationen
             kitImg.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale(1.05)`;
         });
 
-        // Återställ tröjan mjukt när musen lämnar
         kitContainer.addEventListener('mouseleave', () => {
              kitImg.style.transform = `rotateY(0deg) rotateX(0deg) scale(1)`;
         });
